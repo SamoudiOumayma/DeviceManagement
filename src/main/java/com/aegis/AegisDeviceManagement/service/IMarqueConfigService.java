@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.UUID;
 
 public interface IMarqueConfigService {
+
     MarqueConfigDTO createMarqueConfig(MarqueConfigDTO marqueConfigDTO);
 
     MarqueConfigDTO updateMarqueConfig(UUID configId, MarqueConfigDTO marqueConfigDTO);
@@ -15,4 +16,5 @@ public interface IMarqueConfigService {
     MarqueConfigDTO getMarqueConfigById(UUID configId);
 
     List<MarqueConfigDTO> getAllMarqueConfigs();
+
 }

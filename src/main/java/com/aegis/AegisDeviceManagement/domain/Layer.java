@@ -12,6 +12,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Layer {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID layerId;
@@ -28,4 +29,5 @@ public class Layer {
 
     @Column(columnDefinition = "TEXT")
     private String elements;
+
 }

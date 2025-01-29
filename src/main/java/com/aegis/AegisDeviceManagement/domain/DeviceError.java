@@ -14,6 +14,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 public class DeviceError {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID errorId;
@@ -37,4 +38,5 @@ public class DeviceError {
     @ManyToOne
     @JoinColumn(name = "device_id", nullable = false)
     private Device device;
+
 }

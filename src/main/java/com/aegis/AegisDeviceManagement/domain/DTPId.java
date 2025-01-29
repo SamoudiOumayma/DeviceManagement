@@ -13,7 +13,9 @@ import java.util.UUID;
 @AllArgsConstructor
 @Embeddable
 public class DTPId implements Serializable {
+
     private UUID templateId;
     private UUID deviceId;
     private UUID productId;
+
 }

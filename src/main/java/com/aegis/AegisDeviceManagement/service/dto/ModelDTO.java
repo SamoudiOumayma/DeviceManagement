@@ -1,7 +1,6 @@
 package com.aegis.AegisDeviceManagement.service.dto;
 
 import lombok.Data;
-
 import java.util.UUID;
 
 @Data

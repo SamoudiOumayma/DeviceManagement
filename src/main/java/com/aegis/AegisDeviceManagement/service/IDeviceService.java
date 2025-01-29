@@ -16,4 +16,5 @@ public interface IDeviceService {
     DeviceDTO getDeviceById(UUID deviceId);
 
     List<DeviceDTO> getAllDevices();
+
 }

@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 @Service
 public class PageServiceImpl implements IPageService {
 
+<<<<<<< HEAD
     private final PageRepository pageRepository;
     private final IPageMapper pageMapper;
 
@@ -70,4 +71,62 @@ public class PageServiceImpl implements IPageService {
     private PageDTO save(Page page) {
         return pageMapper.toDTO(pageRepository.save(page));
     }
+=======
+private final PageRepository pageRepository;
+private final IPageMapper pageMapper;
+
+public PageServiceImpl(PageRepository pageRepository, IPageMapper pageMapper) {
+	this.pageRepository = pageRepository;
+	this.pageMapper = pageMapper;
+}
+
+@Override
+public PageDTO createPage(PageDTO pageDTO) {
+	return save(pageMapper.toEntity(pageDTO));
+}
+
+@Override
+public PageDTO updatePage(UUID pageId, PageDTO pageDTO) {
+	Page page = findPageById(pageId);
+	updatePageFields(page, pageDTO);
+	return save(page);
+}
+
+@Override
+public void deletePage(UUID pageId) {
+	if (!pageRepository.existsById(pageId)) {
+		throw new RuntimeException("Page not found with ID: " + pageId);
+	}
+	pageRepository.deleteById(pageId);
+}
+
+@Override
+public PageDTO getPageById(UUID pageId) {
+	return pageMapper.toDTO(findPageById(pageId));
+}
+
+@Override
+public List<PageDTO> getAllPages() {
+	return pageRepository.findAll()
+			       .stream()
+			       .map(pageMapper::toDTO)
+			       .collect(Collectors.toList());
+}
+
+
+private Page findPageById(UUID pageId) {
+	return pageRepository.findById(pageId)
+			       .orElseThrow(() -> new RuntimeException("Page not found with ID: " + pageId));
+}
+
+private void updatePageFields(Page page, PageDTO pageDTO) {
+	page.setPageName(pageDTO.getPageName());
+	page.setCondition(pageDTO.getCondition());
+	page.setCanvas(pageDTO.getCanvas());
+}
+
+private PageDTO save(Page page) {
+	return pageMapper.toDTO(pageRepository.save(page));
+}
+>>>>>>> fd2916cb76622af27e886c3de364282dc20bf0d6
 }

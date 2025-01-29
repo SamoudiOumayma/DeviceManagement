@@ -16,4 +16,5 @@ public interface IDeviceErrorService {
     DeviceErrorDTO getDeviceErrorById(UUID errorId);
 
     List<DeviceErrorDTO> getAllDeviceErrors();
+
 }
