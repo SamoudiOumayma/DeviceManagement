@@ -14,7 +14,6 @@ import java.util.stream.Collectors;
 @Service
 public class ModelServiceImpl implements IModelService {
 
-<<<<<<< HEAD
     private final ModelRepository modelRepository;
     private final IModelMapper modelMapper;
 
@@ -70,62 +69,5 @@ public class ModelServiceImpl implements IModelService {
     private ModelDTO save(Model model) {
         return modelMapper.toDTO(modelRepository.save(model));
     }
-=======
-private final ModelRepository modelRepository;
-private final IModelMapper modelMapper;
 
-public ModelServiceImpl(ModelRepository modelRepository, IModelMapper modelMapper) {
-	this.modelRepository = modelRepository;
-	this.modelMapper = modelMapper;
-}
-
-@Override
-public ModelDTO createModel(ModelDTO modelDTO) {
-	return save(modelMapper.toEntity(modelDTO));
-}
-
-@Override
-public ModelDTO updateModel(UUID modelId, ModelDTO modelDTO) {
-	Model model = findModelById(modelId);
-	updateModelFields(model, modelDTO);
-	return save(model);
-}
-
-@Override
-public void deleteModel(UUID modelId) {
-	if (!modelRepository.existsById(modelId)) {
-		throw new RuntimeException("Model not found with ID: " + modelId);
-	}
-	modelRepository.deleteById(modelId);
-}
-
-@Override
-public ModelDTO getModelById(UUID modelId) {
-	return modelMapper.toDTO(findModelById(modelId));
-}
-
-@Override
-public List<ModelDTO> getAllModels() {
-	return modelRepository.findAll()
-			       .stream()
-			       .map(modelMapper::toDTO)
-			       .collect(Collectors.toList());
-}
-
-// 🔹 Méthodes privées pour éviter la duplication de code
-
-private Model findModelById(UUID modelId) {
-	return modelRepository.findById(modelId)
-			       .orElseThrow(() -> new RuntimeException("Model not found with ID: " + modelId));
-}
-
-private void updateModelFields(Model model, ModelDTO modelDTO) {
-	model.setModelKey(modelDTO.getModelKey());
-	model.setModelValue(modelDTO.getModelValue());
-}
-
-private ModelDTO save(Model model) {
-	return modelMapper.toDTO(modelRepository.save(model));
-}
->>>>>>> fd2916cb76622af27e886c3de364282dc20bf0d6
 }
