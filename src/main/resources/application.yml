@@ -1,0 +1,16 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: Aegis_Device_Management
+
+  datasource:
+    url: jdbc:postgresql://dpg-cu727lrqf0us73e0scpg-a.frankfurt-postgres.render.com:5432/aegis_db_evm3
+    username: aegis_connect
+    password: MVCjZ91UV7u6QvjNznmNYXkUTwhsw570
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
