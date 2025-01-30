@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
 
@@ -12,14 +13,14 @@ import java.util.UUID;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Page {
+public class Page implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID pageId;
+    private UUID id;
 
     @Column(nullable = false)
-    private String pageName;
+    private String name;
 
     @Column(columnDefinition = "TEXT")
     private String condition;

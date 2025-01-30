@@ -3,6 +3,7 @@ package com.aegis.AegisDeviceManagement.service.mapper;
 import com.aegis.AegisDeviceManagement.domain.MarqueConfig;
 import com.aegis.AegisDeviceManagement.service.dto.MarqueConfigDTO;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 import java.util.List;
 

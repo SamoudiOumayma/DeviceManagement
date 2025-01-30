@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 
+import java.io.Serializable;
 import java.util.Map;
 import java.util.UUID;
 
@@ -12,11 +13,11 @@ import java.util.UUID;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Product {
+public class Product implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID productId;
+    private UUID id;
 
     @Column(nullable = false)
     private String name;
@@ -25,7 +26,7 @@ public class Product {
 
     @ElementCollection
     @CollectionTable(name = "product_data", joinColumns = @JoinColumn(name = "product_id"))
-    @MapKeyColumn(name = "data_key")
-    @Column(name = "data_value")
+    @MapKeyColumn(name = "key")
+    @Column(name = "value")
     private Map<String, String> data;
 }

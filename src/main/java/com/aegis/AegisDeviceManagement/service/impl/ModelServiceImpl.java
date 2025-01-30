@@ -62,8 +62,8 @@ public class ModelServiceImpl implements IModelService {
     }
 
     private void updateModelFields(Model model, ModelDTO modelDTO) {
-        model.setModelKey(modelDTO.getModelKey());
-        model.setModelValue(modelDTO.getModelValue());
+        model.setKey(modelDTO.getKey());
+        model.setValue(modelDTO.getValue());
     }
 
     private ModelDTO save(Model model) {

@@ -62,7 +62,7 @@ public class PageServiceImpl implements IPageService {
     }
 
     private void updatePageFields(Page page, PageDTO pageDTO) {
-        page.setPageName(pageDTO.getPageName());
+        page.setName(pageDTO.getName());
         page.setCondition(pageDTO.getCondition());
         page.setCanvas(pageDTO.getCanvas());
     }

@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -12,18 +13,14 @@ import java.util.UUID;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class MarqueConfig {
+public class MarqueConfig implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID configId;
-
-    @ManyToOne
-    @JoinColumn(name = "marque_id", nullable = false)
-    private Marque marque;
+    private UUID id;
 
     @Column(nullable = false)
-    private String configName;
+    private String name;
 
     private String endpointUrl;
 
@@ -39,4 +36,7 @@ public class MarqueConfig {
     @Column(nullable = false)
     private LocalDateTime createdAt;
 
+    @ManyToOne
+    @JoinColumn(name = "marque_id", nullable = false)
+    private Marque marque;
 }

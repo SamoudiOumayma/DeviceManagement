@@ -61,7 +61,7 @@ public class LayerServiceImpl implements ILayerService {
     }
 
     private void updateLayerFields(Layer layer, LayerDTO layerDTO) {
-        layer.setLayerName(layerDTO.getLayerName());
+        layer.setName(layerDTO.getName());
         layer.setCondition(layerDTO.getCondition());
         layer.setElements(layerDTO.getElements());
     }

@@ -1,7 +1,7 @@
 package com.aegis.AegisDeviceManagement.web;
 
-import com.aegis.AegisDeviceManagement.service.IDeviceErrorService;
-import com.aegis.AegisDeviceManagement.service.dto.DeviceErrorDTO;
+import com.aegis.AegisDeviceManagement.service.IErrorService;
+import com.aegis.AegisDeviceManagement.service.dto.ErrorDTO;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,30 +12,30 @@ import java.util.UUID;
 @RequestMapping("/device")
 public class DeviceErrorController {
 
-    private final IDeviceErrorService deviceErrorService;
+    private final IErrorService deviceErrorService;
 
-    public DeviceErrorController(IDeviceErrorService deviceErrorService) {
+    public DeviceErrorController(IErrorService deviceErrorService) {
         this.deviceErrorService = deviceErrorService;
     }
 
     @PostMapping("createDeviceError")
-    public DeviceErrorDTO createDeviceError(@RequestBody DeviceErrorDTO deviceErrorDTO) {
-        return deviceErrorService.createDeviceError(deviceErrorDTO);
+    public ErrorDTO createDeviceError(@RequestBody ErrorDTO errorDTO) {
+        return deviceErrorService.createDeviceError(errorDTO);
     }
 
     @GetMapping("getDeviceError/{id}")
-    public DeviceErrorDTO getDeviceErrorById(@PathVariable UUID id) {
+    public ErrorDTO getDeviceErrorById(@PathVariable UUID id) {
         return deviceErrorService.getDeviceErrorById(id);
     }
 
     @GetMapping("getAllDeviceErrors")
-    public List<DeviceErrorDTO> getAllDeviceErrors() {
+    public List<ErrorDTO> getAllDeviceErrors() {
         return deviceErrorService.getAllDeviceErrors();
     }
 
     @PutMapping("updateDeviceError/{id}")
-    public DeviceErrorDTO updateDeviceError(@PathVariable UUID id, @RequestBody DeviceErrorDTO deviceErrorDTO){
-        return deviceErrorService.updateDeviceError(id, deviceErrorDTO);
+    public ErrorDTO updateDeviceError(@PathVariable UUID id, @RequestBody ErrorDTO errorDTO){
+        return deviceErrorService.updateDeviceError(id, errorDTO);
     }
 
     @DeleteMapping("deleteDeviceError/{id}")

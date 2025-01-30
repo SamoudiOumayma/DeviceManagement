@@ -5,24 +5,25 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Layer {
+public class Layer implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID layerId;
+    private UUID id;
 
     @ManyToOne
     @JoinColumn(name = "page_id", nullable = false)
     private Page page;
 
     @Column(nullable = false)
-    private String layerName;
+    private String name;
 
     @Column(columnDefinition = "TEXT")
     private String condition;

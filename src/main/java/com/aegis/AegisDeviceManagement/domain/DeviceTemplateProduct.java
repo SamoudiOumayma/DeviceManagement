@@ -5,23 +5,31 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 
+import java.io.Serializable;
+
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class MT {
+public class DeviceTemplateProduct implements Serializable {
 
     @EmbeddedId
-    private MTId id;
-
-    @ManyToOne
-    @MapsId("modelId")
-    @JoinColumn(name = "model_id", nullable = false)
-    private Model model;
+    private DTPId id;
 
     @ManyToOne
     @MapsId("templateId")
     @JoinColumn(name = "template_id", nullable = false)
     private Template template;
+
+    @ManyToOne
+    @MapsId("deviceId")
+    @JoinColumn(name = "device_id", nullable = false)
+    private Device device;
+
+    @ManyToOne
+    @MapsId("productId")
+    @JoinColumn(name = "product_id", nullable = false)
+    private Product product;
+
 }

@@ -30,7 +30,7 @@ public class TemplateServiceImpl implements ITemplateService {
     @Override
     public TemplateDTO updateTemplate(UUID templateId, TemplateDTO templateDTO) {
         Template template = getTemplate(templateId);
-        template.setTemplateName(templateDTO.getTemplateName());
+        template.setName(templateDTO.getName());
         template.setDescription(templateDTO.getDescription());
         template.setOrdre(templateDTO.getOrdre());
         template.setCondition(templateDTO.getCondition());

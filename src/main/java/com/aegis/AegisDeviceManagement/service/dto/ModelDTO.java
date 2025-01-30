@@ -1,12 +1,14 @@
 package com.aegis.AegisDeviceManagement.service.dto;
 
 import lombok.Data;
+
+import java.io.Serializable;
 import java.util.UUID;
 
 @Data
-public class ModelDTO {
+public class ModelDTO implements Serializable {
 
-    private UUID modelId;
-    private String modelKey;
-    private String modelValue;
+    private UUID id;
+    private String key;
+    private String value;
 }

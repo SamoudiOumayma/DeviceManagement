@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -13,20 +14,20 @@ import java.util.UUID;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class DeviceError {
+public class Error implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID errorId;
+    private UUID id;
 
     @Column(nullable = false)
     private String referenced;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private DeviceErrorType errorType;
+    private DeviceErrorType type;
 
-    private String errorMessage;
+    private String message;
     private int retryCount;
 
     @Column(nullable = false)

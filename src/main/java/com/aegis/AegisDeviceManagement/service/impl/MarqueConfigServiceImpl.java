@@ -1,10 +1,13 @@
 package com.aegis.AegisDeviceManagement.service.impl;
 
+import com.aegis.AegisDeviceManagement.domain.Marque;
+import com.aegis.AegisDeviceManagement.repository.MarqueRepository;
 import com.aegis.AegisDeviceManagement.service.IMarqueConfigService;
 import com.aegis.AegisDeviceManagement.service.dto.MarqueConfigDTO;
 import com.aegis.AegisDeviceManagement.repository.MarqueConfigRepository;
 import com.aegis.AegisDeviceManagement.service.mapper.IMarqueConfigMapper;
 import com.aegis.AegisDeviceManagement.domain.MarqueConfig;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,6 +17,8 @@ import java.util.stream.Collectors;
 @Service
 public class MarqueConfigServiceImpl implements IMarqueConfigService {
 
+    @Autowired
+    private MarqueRepository marqueRepository;
     private final MarqueConfigRepository marqueConfigRepository;
     private final IMarqueConfigMapper marqueConfigMapper;
 
@@ -24,9 +29,19 @@ public class MarqueConfigServiceImpl implements IMarqueConfigService {
 
     @Override
     public MarqueConfigDTO createMarqueConfig(MarqueConfigDTO marqueConfigDTO) {
-        return save(marqueConfigMapper.toEntity(marqueConfigDTO));
-    }
+        MarqueConfig marqueConfig = marqueConfigMapper.toEntity(marqueConfigDTO);
 
+        Marque existingMarque = marqueRepository.findById(marqueConfigDTO.getMarqueId())
+                .orElseThrow(() -> new RuntimeException("Marque not found"));
+        marqueConfig.setMarque(existingMarque);
+
+        marqueConfig = marqueConfigRepository.save(marqueConfig);
+
+        MarqueConfigDTO responseDTO = marqueConfigMapper.toDTO(marqueConfig);
+        responseDTO.setMarqueId(existingMarque.getId());
+        return responseDTO;
+    }
+    
     @Override
     public MarqueConfigDTO updateMarqueConfig(UUID configId, MarqueConfigDTO marqueConfigDTO) {
         MarqueConfig marqueConfig = findMarqueConfigById(configId);
@@ -62,7 +77,7 @@ public class MarqueConfigServiceImpl implements IMarqueConfigService {
     }
 
     private void updateMarqueConfigFields(MarqueConfig marqueConfig, MarqueConfigDTO marqueConfigDTO) {
-        marqueConfig.setConfigName(marqueConfigDTO.getConfigName());
+        marqueConfig.setName(marqueConfigDTO.getName());
         marqueConfig.setEndpointUrl(marqueConfigDTO.getEndpointUrl());
         marqueConfig.setAuthMethod(marqueConfigDTO.getAuthMethod());
         marqueConfig.setAuthCredentials(marqueConfigDTO.getAuthCredentials());

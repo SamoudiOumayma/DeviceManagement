@@ -62,7 +62,7 @@ public class MarqueServiceImpl implements IMarqueService {
     }
 
     private void updateMarqueFields(Marque marque, MarqueDTO marqueDTO) {
-        marque.setMarqueName(marqueDTO.getMarqueName());
+        marque.setName(marqueDTO.getName());
         marque.setDescription(marqueDTO.getDescription());
         marque.setLogo(marqueDTO.getLogo());
     }

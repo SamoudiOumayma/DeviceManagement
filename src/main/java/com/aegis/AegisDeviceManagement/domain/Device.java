@@ -6,28 +6,30 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Device {
+public class Device implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID deviceId;
+    private UUID id;
 
     @Column(nullable = false)
-    private String deviceName;
+    private String name;
 
-    private String deviceTag;
+    private String tag;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private DeviceType deviceType;
+    private DeviceType type;
 
     private String status;
 
@@ -53,6 +55,37 @@ public class Device {
     private Model model;
 
     @OneToMany(mappedBy = "device", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<DeviceError> deviceErrors;
+    private List<Error> errors;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Device device)) return false;
+        return Objects.equals(getId(), device.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
+    }
+
+    @Override
+    public String toString() {
+        return "Device{" +
+                "deviceId=" + id +
+                ", deviceName='" + name + '\'' +
+                ", deviceTag='" + tag + '\'' +
+                ", deviceType=" + type +
+                ", status='" + status + '\'' +
+                ", xCoordinate=" + xCoordinate +
+                ", yCoordinate=" + yCoordinate +
+                ", lastSeen=" + lastSeen +
+                ", createdAt=" + createdAt +
+                ", hardwareId=" + hardwareId +
+                ", updateFrequency=" + updateFrequency +
+                ", marque=" + marque +
+                ", model=" + model +
+                ", deviceErrors=" + errors +
+                '}';
+    }
 }

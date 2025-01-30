@@ -61,9 +61,9 @@ public class DeviceServiceImpl implements IDeviceService {
     }
 
     private void updateDeviceFields(Device device, DeviceDTO deviceDTO) {
-        device.setDeviceName(deviceDTO.getDeviceName());
-        device.setDeviceTag(deviceDTO.getDeviceTag());
-        device.setDeviceType(deviceDTO.getDeviceType());
+        device.setName(deviceDTO.getName());
+        device.setTag(deviceDTO.getTag());
+        device.setType(deviceDTO.getType());
         device.setStatus(deviceDTO.getStatus());
         device.setXCoordinate(deviceDTO.getXCoordinate());
         device.setYCoordinate(deviceDTO.getYCoordinate());
