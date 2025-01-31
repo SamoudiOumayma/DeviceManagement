@@ -3,18 +3,10 @@ package com.aegis.AegisDeviceManagement.service.mapper;
 import com.aegis.AegisDeviceManagement.domain.Product;
 import com.aegis.AegisDeviceManagement.service.dto.ProductDTO;
 import org.mapstruct.Mapper;
+import org.springframework.context.annotation.Primary;
 
 import java.util.List;
-
+@Primary
 @Mapper(componentModel = "spring")
-public interface IProductMapper {
-
-    ProductDTO toDTO(Product product);
-
-    Product toEntity(ProductDTO productDTO);
-
-    List<ProductDTO> toDTOList(List<Product> products);
-
-    List<Product> toEntityList(List<ProductDTO> productDTOs);
-
+public interface IProductMapper extends IBaseMapper<Product, ProductDTO> {
 }

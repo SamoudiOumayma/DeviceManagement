@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.UUID;
 
 @Data
-public class MarqueDTO implements Serializable {
+public class MarqueDTO extends BaseEntityDTO implements  Serializable {
 
     private UUID id;
     private String name;

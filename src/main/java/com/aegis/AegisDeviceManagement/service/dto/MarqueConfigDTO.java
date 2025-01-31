@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Data
-public class MarqueConfigDTO implements Serializable {
+public class MarqueConfigDTO extends BaseEntityDTO implements Serializable {
 
     private UUID id;
     private String name;
@@ -16,6 +16,4 @@ public class MarqueConfigDTO implements Serializable {
     private String authCredentials;
     private LocalDateTime lastConnectionAttempt;
     private String connectionStatus;
-    private LocalDateTime createdAt;
-    private UUID marqueId;
 }

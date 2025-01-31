@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.UUID;
 
 @Data
-public class ModelDTO implements Serializable {
+public class ModelDTO extends BaseEntityDTO implements Serializable {
 
     private UUID id;
     private String key;

@@ -12,9 +12,9 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Embeddable
-public class MTId implements Serializable {
+public class DPId implements Serializable {
 
-    private UUID modelId;
-    private UUID templateId;
+private UUID deviceId;
+private UUID productId;
 
 }

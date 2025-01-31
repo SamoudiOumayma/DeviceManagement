@@ -36,6 +36,5 @@ public class Template implements Serializable {
     @OneToMany(mappedBy = "template", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Page> pages;
 
-    @OneToMany(mappedBy = "template", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<DeviceTemplateProduct> deviceTemplateProducts;
+
 }

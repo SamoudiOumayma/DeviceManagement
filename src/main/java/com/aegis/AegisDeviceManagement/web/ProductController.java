@@ -9,7 +9,7 @@ import java.util.UUID;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/device")
+@RequestMapping("/api/v1/device")
 public class ProductController {
     private final IProductService productService;
 
@@ -17,27 +17,27 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @PostMapping("createProduct")
+    @PostMapping
     public ProductDTO createProduct(@RequestBody ProductDTO productDTO) {
         return productService.createProduct(productDTO);
     }
 
-    @GetMapping("getProduct/{id}")
+    @GetMapping("/{id}")
     public ProductDTO getProductById(@PathVariable UUID id) {
         return productService.getProductById(id);
     }
 
-    @GetMapping("getAllProducts")
+    @GetMapping("/All")
     public List<ProductDTO> getAllProducts() {
         return productService.getAllProducts();
     }
 
-    @PutMapping("updateProduct/{id}")
+    @PutMapping("/{id}")
     public ProductDTO updateProduct(@PathVariable UUID id, @RequestBody ProductDTO productDTO) {
         return productService.updateProduct(id, productDTO);
     }
 
-    @DeleteMapping("deleteProduct/{id}")
+    @DeleteMapping("/{id}")
     public void deleteProduct(@PathVariable UUID id) {
         productService.deleteProduct(id);
     }

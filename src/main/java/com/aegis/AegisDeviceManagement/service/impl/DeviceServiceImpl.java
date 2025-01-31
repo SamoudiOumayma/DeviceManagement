@@ -1,12 +1,13 @@
 package com.aegis.AegisDeviceManagement.service.impl;
 
 import com.aegis.AegisDeviceManagement.domain.Device;
+import com.aegis.AegisDeviceManagement.repository.IDeviceRepository;
 import com.aegis.AegisDeviceManagement.service.IDeviceService;
 import com.aegis.AegisDeviceManagement.service.dto.DeviceDTO;
-import com.aegis.AegisDeviceManagement.repository.DeviceRepository;
 import com.aegis.AegisDeviceManagement.service.mapper.IDeviceMapper;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -14,10 +15,10 @@ import java.util.stream.Collectors;
 @Service
 public class DeviceServiceImpl implements IDeviceService {
 
-    private final DeviceRepository deviceRepository;
+    private final IDeviceRepository deviceRepository;
     private final IDeviceMapper deviceMapper;
 
-    public DeviceServiceImpl(DeviceRepository deviceRepository, IDeviceMapper deviceMapper) {
+    public DeviceServiceImpl(IDeviceRepository deviceRepository, IDeviceMapper deviceMapper) {
         this.deviceRepository = deviceRepository;
         this.deviceMapper = deviceMapper;
     }
@@ -29,6 +30,9 @@ public class DeviceServiceImpl implements IDeviceService {
 
     @Override
     public DeviceDTO updateDevice(UUID deviceId, DeviceDTO deviceDTO) {
+        if(!deviceRepository.isDeleted ( deviceId )) {
+            throw new RuntimeException ("device not found");
+        }
         Device device = findDeviceById(deviceId);
         updateDeviceFields(device, deviceDTO);
         return save(device);
@@ -39,17 +43,21 @@ public class DeviceServiceImpl implements IDeviceService {
         if (!deviceRepository.existsById(deviceId)) {
             throw new RuntimeException("Device not found with ID: " + deviceId);
         }
-        deviceRepository.deleteById(deviceId);
+        deviceRepository.softDelete(deviceId);
     }
 
     @Override
     public DeviceDTO getDeviceById(UUID deviceId) {
-        return deviceMapper.toDTO(findDeviceById(deviceId));
+        if ( ! deviceRepository.isDeleted ( deviceId ) ) {
+            throw new RuntimeException("Device not found with ID: " + deviceId);
+        }
+        return deviceMapper.toDTO ( findDeviceById ( deviceId ) );
+
     }
 
     @Override
     public List<DeviceDTO> getAllDevices() {
-        return deviceRepository.findAll()
+        return deviceRepository.findAllActive ()
                 .stream()
                 .map(deviceMapper::toDTO)
                 .collect(Collectors.toList());
@@ -69,6 +77,7 @@ public class DeviceServiceImpl implements IDeviceService {
         device.setYCoordinate(deviceDTO.getYCoordinate());
         device.setLastSeen(deviceDTO.getLastSeen());
         device.setUpdateFrequency(deviceDTO.getUpdateFrequency());
+        device.setUpdatedAt ( LocalDateTime.from ( java.time.Instant.now () ) );
     }
 
     private DeviceDTO save(Device device) {

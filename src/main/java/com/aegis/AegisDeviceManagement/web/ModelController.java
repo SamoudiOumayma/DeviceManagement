@@ -9,7 +9,7 @@ import java.util.UUID;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/device")
+@RequestMapping("/api/v1/device")
 public class ModelController {
     private final IModelService modelService;
 
@@ -17,27 +17,27 @@ public class ModelController {
         this.modelService = modelService;
     }
 
-    @PostMapping("createModel")
+    @PostMapping
     public ModelDTO createModel(@RequestBody ModelDTO modelDTO) {
         return modelService.createModel(modelDTO);
     }
 
-    @GetMapping("getModel/{id}")
+    @GetMapping("/{id}")
     public ModelDTO getModelById(@PathVariable UUID id) {
         return modelService.getModelById(id);
     }
 
-    @GetMapping
+    @GetMapping("/All")
     public List<ModelDTO> getAllModels() {
         return modelService.getAllModels();
     }
 
-    @PutMapping("updateModel/{id}")
+    @PutMapping("/{id}")
     public ModelDTO updateModel(@PathVariable UUID id, @RequestBody ModelDTO modelDTO) {
         return modelService.updateModel(id, modelDTO);
     }
 
-    @DeleteMapping("deleteModel/{id}")
+    @DeleteMapping("/{id}")
     public void deleteModel(@PathVariable UUID id) {
         modelService.deleteModel(id);
     }

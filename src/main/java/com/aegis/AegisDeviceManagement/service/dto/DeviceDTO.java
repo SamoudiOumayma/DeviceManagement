@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Data
-public class DeviceDTO implements Serializable {
+public class DeviceDTO extends BaseEntityDTO implements Serializable {
 
     private UUID id;
     private String name;
@@ -18,8 +18,8 @@ public class DeviceDTO implements Serializable {
     private Float xCoordinate;
     private Float yCoordinate;
     private LocalDateTime lastSeen;
-    private LocalDateTime createdAt;
     private Integer updateFrequency;
     private UUID marqueId;
+    private UUID marqueConfigId;
     private UUID modelId;
 }

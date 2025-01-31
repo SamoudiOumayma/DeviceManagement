@@ -10,7 +10,17 @@ spring:
     username: aegis_connect
     password: MVCjZ91UV7u6QvjNznmNYXkUTwhsw570
     driver-class-name: org.postgresql.Driver
+
   jpa:
     hibernate:
       ddl-auto: update
     open-in-view: false
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    hostname: localhost

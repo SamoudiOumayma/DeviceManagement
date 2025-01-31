@@ -1,42 +1,65 @@
 package com.aegis.AegisDeviceManagement.domain;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
+import lombok.*;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Objects;
 import java.util.UUID;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class MarqueConfig implements Serializable {
+public class MarqueConfig extends BaseEntity implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+private static final long serialVersionUID = 67973292120249808L;
 
-    @Column(nullable = false)
-    private String name;
+@Id
+@GeneratedValue ( strategy = GenerationType.AUTO )
+private UUID id;
 
-    private String endpointUrl;
+@Column ( nullable = false )
+private String name;
 
-    private String authMethod;
+private String endpointUrl;
 
-    @Column(columnDefinition = "TEXT")
-    private String authCredentials;
+private String authMethod;
 
-    private LocalDateTime lastConnectionAttempt;
+@Column ( columnDefinition = "TEXT" )
+private String authCredentials;
 
-    private String connectionStatus;
+private LocalDateTime lastConnectionAttempt;
 
-    @Column(nullable = false)
-    private LocalDateTime createdAt;
+private String connectionStatus;
 
-    @ManyToOne
-    @JoinColumn(name = "marque_id", nullable = false)
-    private Marque marque;
+@Override
+public boolean equals ( Object obj ) {
+	if ( this == obj ) return true;
+	if ( ! ( obj instanceof MarqueConfig other ) ) return false;
+	return Objects.equals ( id , other.id );
+}
+
+@Override
+public int hashCode ( ) {
+	return Objects.hash ( id );
+}
+
+@Override
+public String toString ( ) {
+	return "MarqueConfig{" +
+			       "id=" + id +
+			       ", name='" + name + '\'' +
+			       ", endpointUrl='" + endpointUrl + '\'' +
+			       ", authMethod='" + authMethod + '\'' +
+			       ", lastConnectionAttempt=" + lastConnectionAttempt +
+			       ", connectionStatus='" + connectionStatus + '\'' +
+			       ", deleted=" + isDeleted ( ) +
+			       ", createdAt=" + getCreatedAt ( ) +
+			       ", updatedAt=" + getUpdatedAt ( ) +
+			       ", createdBy=" + getCreatedBy ( ) +
+			       '}';
+}
 }

@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.UUID;
 
 @Data
-public class ProductDTO implements Serializable {
+public class ProductDTO extends BaseEntityDTO implements Serializable {
 
     private UUID id;
     private String name;

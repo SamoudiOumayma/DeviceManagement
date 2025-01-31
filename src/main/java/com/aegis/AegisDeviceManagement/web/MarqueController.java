@@ -9,7 +9,7 @@ import java.util.UUID;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/device")
+@RequestMapping("/api/v1/device")
 public class MarqueController {
     private final IMarqueService marqueService;
 
@@ -17,27 +17,27 @@ public class MarqueController {
         this.marqueService = marqueService;
     }
 
-    @PostMapping("createMarque")
+    @PostMapping
     public MarqueDTO createMarque(@RequestBody MarqueDTO marqueDTO) {
         return marqueService.createMarque(marqueDTO);
     }
 
-    @GetMapping("getMarque/{id}")
+    @GetMapping("/{id}")
     public MarqueDTO getMarqueById(@PathVariable UUID id) {
         return marqueService.getMarqueById(id);
     }
 
-    @GetMapping("getAllMarques")
+    @GetMapping("/All")
     public List<MarqueDTO> getAllMarques() {
         return marqueService.getAllMarques();
     }
 
-    @PutMapping("updateMarque/{id}")
+    @PutMapping("/{id}")
     public MarqueDTO updateMarque(@PathVariable UUID id, @RequestBody MarqueDTO marqueDTO) {
         return marqueService.updateMarque(id, marqueDTO);
     }
 
-    @DeleteMapping("deleteMarque/{id}")
+    @DeleteMapping("/{id}")
     public void deleteMarque(@PathVariable UUID id) {
         marqueService.deleteMarque(id);
     }
